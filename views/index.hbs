@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/4efece833a.js"></script>
+  </head>
+  <body>
+    <center>
+      <h1>{{title}}</h1>
+      <div>
+        {{#unless todos}}
+        <br>
+          <p>Nothing to do.Add some task please</p>
+        {{/unless}}
+          {{#each todos as |todo|}}
+              <div class="box">
+                <label>{{todo.title}} </label>
+                <p>{{todo.description}} <a href="/delete/{{todo._id}}"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>{{#unless todo.completed}}<a href="/edit/{{todo._id}}"><i class="fa fa-check text-success mr-4" aria-hidden="true"></i></a>{{/unless}} </p>
+              </div>
+          {{/each}}
+           <form class="form-c" hidden id="form-j" action="/" method="POST">
+            <label>Title:</label>
+            <input class="form-control" type="text" name="title" placeholder="title..."><br>
+            <label>Description:</label>
+            <input type="text" class="form-control" name="description" placeholder="description...">
+            <center><button type="submit" class="btn btn-primary">Save</button><button type="button" id="cal" class="btn">Cancel</button></center>
+          </form>
+          <button name="addTodo" id="add" class="btn btn-primary">Add New</button>
+      </div>
+    </center>
+  </body>
+  <script> 
+    var addbtn = document.getElementById('add');
+    addbtn.addEventListener('click', ()=> {
+      document.getElementById('form-j').hidden = false;
+    });
+
+    var cancelbtn = document.getElementById('cal');
+    cancelbtn.addEventListener('click', ()=> {
+      document.getElementById('form-j').hidden = true;
+    });
+  </script>
+</html>
